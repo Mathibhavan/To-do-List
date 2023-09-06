@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-
+import { Component, ViewChild,ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +10,18 @@ export class AppComponent {
 
   allitems:string[]=[];
 
-  addTodoItem(newItem: string) {
-    this.allitems.push(newItem);
-  }
-
+  /*addTodoItem(newItem: string) {
+  this.allitems.push(newItem);
+    }*/
   removeTodoItem(index: number) {
     this.allitems.splice(index, 1);
   }
 
+  @ViewChild('newTodo')
+  newTodo!: ElementRef;
+
+  addTodoItem(newItem: string){
+     this.newTodo.nativeElement.value = '';
+     this.allitems.push(newItem);
+  }
 }
